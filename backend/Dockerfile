@@ -13,8 +13,9 @@ COPY prisma ./prisma
 RUN npx prisma generate
 
 # App source + audio library.
-COPY tsconfig.json ./
+COPY tsconfig.json vitest.config.ts ./
 COPY src ./src
+COPY tests ./tests
 COPY media ./media
 
 EXPOSE 4000

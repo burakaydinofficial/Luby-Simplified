@@ -81,6 +81,21 @@ Playlists _(Bearer token)_:
 - `GET /api/me/playlists/:id` · `PATCH /api/me/playlists/:id` `{ name }` · `DELETE /api/me/playlists/:id`
 - `POST /api/me/playlists/:id/items` `{ lullabyId }` · `DELETE /api/me/playlists/:id/items/:lullabyId`
 
+## Tests
+
+Backend integration tests (Vitest + Supertest) exercise the API over HTTP against a
+throwaway `luby_test` database. They run via a Docker Compose `test` profile, isolated
+from the dev stack:
+
+```bash
+docker compose --profile test run --rm --build test   # builds, seeds a test DB, runs vitest
+docker compose --profile test down                    # clean up the test containers
+```
+
+The run exits non-zero if any test fails. Coverage: auth (register/login, duplicate,
+validation, token guards), catalog (list/filter/search/404), likes, and the full
+playlist lifecycle (create/add/rename/remove/delete + ownership isolation).
+
 ## Local development (without Docker)
 
 You need a Postgres instance (e.g. `docker compose up db`).
