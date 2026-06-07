@@ -1,0 +1,101 @@
+.header-menu {
+  position: relative;
+}
+
+.header-menu-panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 70;
+  min-width: 12rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.85rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 0.75em 1.5em rgba(0, 0, 0, 0.18);
+}
+
+.header-menu-user {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85em;
+}
+
+.header-menu-name {
+  font-weight: 700;
+}
+
+.header-menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.header-menu-label {
+  font-size: 0.75em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.header-menu-themes {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.theme-swatch {
+  width: 1.8em;
+  height: 1.8em;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.theme-swatch.is-active {
+  border-color: var(--foreground);
+}
+
+.theme-swatch-yellow {
+  background: rgb(252, 232, 131);
+}
+
+.theme-swatch-pink {
+  background: rgb(255, 204, 229);
+}
+
+.theme-swatch-blue {
+  background: rgb(179, 217, 255);
+}
+
+.header-menu-divider {
+  height: 1px;
+  background: var(--border);
+}
+
+.header-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.5em 0.4em;
+  border: none;
+  border-radius: var(--radius);
+  background: transparent;
+  font: inherit;
+  font-weight: 700;
+  color: var(--foreground);
+  cursor: pointer;
+  text-align: left;
+}
+
+.header-menu-item:hover {
+  background: rgba(var(--accent-rgb), 0.15);
+}

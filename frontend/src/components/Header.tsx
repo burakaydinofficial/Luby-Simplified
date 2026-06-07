@@ -1,11 +1,11 @@
 import { Link, NavLink } from 'react-router-dom';
-import { Moon, LogOut } from 'lucide-react';
+import { Moon } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { ThemeToggle } from './ThemeToggle';
+import { HeaderMenu } from './HeaderMenu';
 import './Header.css';
 
 export function Header() {
-  const { user, isAuthenticated, logout, openAuthModal } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   return (
     <header className="app-header">
@@ -27,20 +27,7 @@ export function Header() {
         </nav>
 
         <div className="app-header-actions">
-          <ThemeToggle />
-          {isAuthenticated ? (
-            <>
-              <span className="user-name muted">{user?.displayName}</span>
-              <button className="button-outline" onClick={logout}>
-                <LogOut size={16} />
-                Log out
-              </button>
-            </>
-          ) : (
-            <button className="button" onClick={openAuthModal}>
-              Sign in
-            </button>
-          )}
+          <HeaderMenu />
         </div>
       </div>
     </header>
