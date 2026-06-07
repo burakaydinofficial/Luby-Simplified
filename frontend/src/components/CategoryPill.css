@@ -1,0 +1,25 @@
+.category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.45em 1em;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  font: inherit;
+  font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.category-pill:hover {
+  color: var(--foreground);
+}
+
+.category-pill.is-active {
+  background: var(--primary);
+  border-color: transparent;
+  color: var(--foreground);
+}

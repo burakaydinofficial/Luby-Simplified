@@ -1,0 +1,308 @@
+/* Design tokens — ported from Luby and extended for the library app.
+   Three pastel themes; switched via a class on <html> (see ThemeContext). */
+:root {
+  --background-rgb: 250, 248, 231; /* Very pale yellow */
+  --foreground-rgb: 24, 24, 24;
+  --muted-rgb: 110, 108, 96;
+  --primary-rgb: 252, 232, 131; /* Soft pastel yellow */
+  --accent-rgb: 240, 178, 103; /* Light, muted orange */
+  --card-rgb: 255, 255, 255;
+  --border-rgb: 229, 229, 229;
+  --input-rgb: 240, 240, 240;
+  --destructive-rgb: 220, 53, 69;
+
+  --background: rgb(var(--background-rgb));
+  --foreground: rgb(var(--foreground-rgb));
+  --muted: rgb(var(--muted-rgb));
+  --primary: rgb(var(--primary-rgb));
+  --accent: rgb(var(--accent-rgb));
+  --card: rgb(var(--card-rgb));
+  --border: rgb(var(--border-rgb));
+  --input: rgb(var(--input-rgb));
+  --destructive: rgb(var(--destructive-rgb));
+
+  --radius: 0.75rem;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 0.25em 0.75em rgba(0, 0, 0, 0.1);
+  --player-height: 5.5rem;
+  --header-height: 4rem;
+}
+
+.theme-pink {
+  --background-rgb: 253, 240, 243;
+  --muted-rgb: 124, 100, 110;
+  --primary-rgb: 255, 204, 229;
+  --accent-rgb: 255, 153, 204;
+}
+
+.theme-blue {
+  --background-rgb: 237, 246, 255;
+  --muted-rgb: 96, 110, 130;
+  --primary-rgb: 179, 217, 255;
+  --accent-rgb: 128, 191, 255;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'PT Sans', system-ui, sans-serif;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Buttons */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  white-space: nowrap;
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 700;
+  padding: 0.6em 1.4em;
+  background-color: var(--primary);
+  color: var(--foreground);
+  border: none;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.05s;
+  box-shadow: var(--shadow-md);
+}
+
+.button:hover {
+  filter: brightness(104%);
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  white-space: nowrap;
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 700;
+  padding: 0.6em 1.4em;
+  background-color: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.button-outline:hover {
+  background-color: rgba(var(--accent-rgb), 0.15);
+}
+
+/* Icon-only round button */
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4em;
+  height: 2.4em;
+  border-radius: 9999px;
+  background: transparent;
+  border: none;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.icon-button:hover {
+  background-color: rgba(var(--accent-rgb), 0.18);
+}
+
+/* Form fields */
+input,
+textarea,
+select {
+  display: flex;
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--card);
+  padding: 0.7em 0.9em;
+  font-family: inherit;
+  font-size: 1em;
+  color: var(--foreground);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+label {
+  font-size: 0.85em;
+  font-weight: 700;
+  display: block;
+}
+
+/* Spinner */
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Helpers */
+.muted {
+  color: var(--muted);
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* Page layout helpers */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.page-title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  line-height: 1.1;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: 1.25rem;
+}
+
+.track-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3.5rem 1rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* Collection (playlist / liked) hero */
+.collection-hero {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.25rem;
+}
+
+.collection-hero-info {
+  flex: 1;
+  gap: 0.35rem;
+}
+
+.collection-cover {
+  width: 8em;
+  height: 8em;
+  flex: none;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, hsl(250 60% 72%), hsl(280 55% 58%));
+}
+
+.collection-cover.liked {
+  background: linear-gradient(135deg, hsl(330 75% 76%), hsl(350 65% 58%));
+}
+
+.collection-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

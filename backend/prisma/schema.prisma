@@ -1,0 +1,74 @@
+// Luby-Web data model. This schema is the single source of truth for the DB.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  passwordHash String
+  displayName  String
+  createdAt    DateTime   @default(now())
+  playlists    Playlist[]
+  likes        Like[]
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  name      String
+  lullabies Lullaby[]
+}
+
+model Lullaby {
+  id          String         @id @default(cuid())
+  slug        String         @unique
+  title       String
+  style       String
+  tempo       String
+  durationSec Int
+  lyrics      String
+  audioUrl    String
+  tags        String[]
+  categoryId  String
+  category    Category       @relation(fields: [categoryId], references: [id])
+  likes       Like[]
+  items       PlaylistItem[]
+}
+
+model Playlist {
+  id        String         @id @default(cuid())
+  name      String
+  userId    String
+  createdAt DateTime       @default(now())
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     PlaylistItem[]
+}
+
+model PlaylistItem {
+  id         String   @id @default(cuid())
+  playlistId String
+  lullabyId  String
+  position   Int
+  addedAt    DateTime @default(now())
+  playlist   Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  lullaby    Lullaby  @relation(fields: [lullabyId], references: [id], onDelete: Cascade)
+
+  @@unique([playlistId, lullabyId])
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  lullabyId String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lullaby   Lullaby  @relation(fields: [lullabyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lullabyId])
+}

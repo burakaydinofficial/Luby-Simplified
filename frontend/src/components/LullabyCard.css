@@ -1,0 +1,66 @@
+.lullaby-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.lullaby-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.lullaby-card-cover {
+  position: relative;
+}
+
+.lullaby-card-play {
+  position: absolute;
+  bottom: 0.5em;
+  right: 0.5em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8em;
+  height: 2.8em;
+  border-radius: 9999px;
+  border: none;
+  background: var(--primary);
+  color: var(--foreground);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateY(0.4em);
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.lullaby-card:hover .lullaby-card-play,
+.lullaby-card-play:focus-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lullaby-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.lullaby-card-title {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.lullaby-card-sub {
+  font-size: 0.85em;
+}
+
+.lullaby-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}

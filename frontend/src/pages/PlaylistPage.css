@@ -1,0 +1,11 @@
+.playlist-rename {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.playlist-rename input {
+  max-width: 18rem;
+  font-size: 1.2em;
+  font-weight: 700;
+}

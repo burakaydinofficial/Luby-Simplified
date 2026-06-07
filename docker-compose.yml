@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-luby}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-luby}
+      POSTGRES_DB: ${POSTGRES_DB:-luby}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-luby} -d ${POSTGRES_DB:-luby}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-luby}:${POSTGRES_PASSWORD:-luby}@db:5432/${POSTGRES_DB:-luby}?schema=public
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me}
+      PORT: "4000"
+      NODE_ENV: production
+    expose:
+      - "4000"
+
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+
+volumes:
+  db-data:

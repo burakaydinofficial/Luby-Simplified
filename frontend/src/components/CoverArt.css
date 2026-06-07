@@ -1,0 +1,16 @@
+.cover-art {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  background: var(--cover, var(--primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-sm);
+}
+
+.cover-art-icon {
+  width: 42%;
+  height: 42%;
+}

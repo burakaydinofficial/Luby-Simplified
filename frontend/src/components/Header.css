@@ -1,0 +1,53 @@
+.app-header {
+  flex: none;
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+}
+
+.app-header-inner {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-weight: 700;
+  font-size: 1.3em;
+}
+
+.brand-icon {
+  color: var(--accent);
+}
+
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-link {
+  font-weight: 700;
+  color: var(--muted);
+  padding: 0.3em 0;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-link.active {
+  color: var(--foreground);
+  border-bottom-color: var(--accent);
+}
+
+.app-header-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-name {
+  font-weight: 700;
+}
