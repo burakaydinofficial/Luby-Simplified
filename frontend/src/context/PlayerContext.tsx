@@ -41,19 +41,19 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const next = useCallback(() => {
-    setCurrentIndex((index) => {
-      if (index < 0 || index >= queue.length - 1) {
-        setIsPlaying(false);
-        return index;
-      }
+    if (currentIndex >= 0 && currentIndex < queue.length - 1) {
+      setCurrentIndex(currentIndex + 1);
       setIsPlaying(true);
-      return index + 1;
-    });
-  }, [queue.length]);
+    } else {
+      setIsPlaying(false); // reached the end of the queue
+    }
+  }, [currentIndex, queue.length]);
 
   const previous = useCallback(() => {
-    setCurrentIndex((index) => (index > 0 ? index - 1 : index));
-  }, []);
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  }, [currentIndex]);
 
   const currentTrack = currentIndex >= 0 ? (queue[currentIndex] ?? null) : null;
 
