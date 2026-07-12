@@ -13,7 +13,8 @@ export function PlayerBar() {
 
   const trackId = currentTrack?.id;
 
-  // Load the audio source whenever the track changes.
+  // Load the audio source whenever the track changes. The play/pause effect
+  // below then starts playback, so we only load here.
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio || !currentTrack) return;
@@ -21,14 +22,10 @@ export function PlayerBar() {
     audio.load();
     setCurrentTime(0);
     setDuration(0);
-    if (isPlaying) {
-      audio.play().catch(() => setIsPlaying(false));
-    }
-    // Only re-run when the track itself changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trackId]);
 
-  // React to play/pause toggles.
+  // Play or pause, both on toggle and after a new track loads.
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio || !currentTrack) return;
