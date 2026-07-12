@@ -24,17 +24,18 @@ export function LullabyCard({ lullaby, queue }: LullabyCardProps) {
   };
 
   return (
-    <div className="lullaby-card">
-      <div className="lullaby-card-cover">
+    <div className={`lullaby-card${isCurrent ? ' is-current' : ''}`}>
+      {/* The whole cover is the play/pause control (works on touch, no hover needed). */}
+      <button
+        className="lullaby-card-cover"
+        onClick={handlePlay}
+        aria-label={`${isCurrent && isPlaying ? 'Pause' : 'Play'} ${lullaby.title}`}
+      >
         <CoverArt seed={lullaby.slug} categorySlug={lullaby.category?.slug} />
-        <button
-          className="lullaby-card-play"
-          onClick={handlePlay}
-          aria-label={isCurrent && isPlaying ? 'Pause' : 'Play'}
-        >
+        <span className="lullaby-card-play-badge" aria-hidden>
           {isCurrent && isPlaying ? <Pause size={22} /> : <Play size={22} />}
-        </button>
-      </div>
+        </span>
+      </button>
       <div className="lullaby-card-body">
         <span className="lullaby-card-title">{lullaby.title}</span>
         <span className="lullaby-card-sub muted">{lullaby.category?.name ?? lullaby.style}</span>
