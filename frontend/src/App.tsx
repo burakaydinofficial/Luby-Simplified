@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './components/Header';
 import { PlayerBar } from './components/PlayerBar';
-import { AuthModal } from './components/AuthModal';
+import { ModalHost } from './components/ModalHost';
 import { HomePage } from './pages/HomePage';
 import { LibraryPage } from './pages/LibraryPage';
 import { LikedPage } from './pages/LikedPage';
@@ -24,7 +24,7 @@ export function App() {
         </div>
       </main>
       <PlayerBar />
-      <AuthModal />
+      <ModalHost />
     </div>
   );
 }

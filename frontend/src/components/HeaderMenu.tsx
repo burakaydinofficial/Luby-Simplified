@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Menu as MenuIcon, LogOut, LogIn, Check } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useModal } from '../context/ModalContext';
 import { useTheme, type Theme } from '../context/ThemeContext';
 import './HeaderMenu.css';
 
@@ -11,7 +12,8 @@ const THEME_OPTIONS: { id: Theme; label: string }[] = [
 ];
 
 export function HeaderMenu() {
-  const { user, isAuthenticated, logout, openAuthModal } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
+  const { open: openModal } = useModal();
   const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -37,7 +39,7 @@ export function HeaderMenu() {
 
   const signIn = () => {
     setOpen(false);
-    openAuthModal();
+    openModal({ type: 'auth' });
   };
 
   const signOut = () => {

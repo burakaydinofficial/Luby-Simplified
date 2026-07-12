@@ -7,8 +7,14 @@ import './AuthModal.css';
 
 type Mode = 'login' | 'signup';
 
-export function AuthModal() {
-  const { authModalOpen, closeAuthModal, login } = useAuth();
+interface AuthModalProps {
+  /** Ran once after a successful login (e.g. the gated action that opened this). */
+  onSuccess?: () => void;
+  onClose: () => void;
+}
+
+export function AuthModal({ onSuccess, onClose }: AuthModalProps) {
+  const { login } = useAuth();
   const [mode, setMode] = useState<Mode>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,22 +24,6 @@ export function AuthModal() {
   const [loginMutation, loginState] = useLoginMutation();
   const [registerMutation, registerState] = useRegisterMutation();
   const submitting = loginState.isLoading || registerState.isLoading;
-
-  if (!authModalOpen) {
-    return null;
-  }
-
-  const reset = () => {
-    setEmail('');
-    setPassword('');
-    setDisplayName('');
-    setError(null);
-  };
-
-  const close = () => {
-    reset();
-    closeAuthModal();
-  };
 
   const switchMode = (next: Mode) => {
     setMode(next);
@@ -48,15 +38,17 @@ export function AuthModal() {
         mode === 'login'
           ? await loginMutation({ email, password }).unwrap()
           : await registerMutation({ email, password, displayName }).unwrap();
-      reset();
       login(result.token);
+      // Close first; if the gated action opens another modal, it takes over.
+      onClose();
+      onSuccess?.();
     } catch (err) {
       setError(getApiErrorMessage(err) ?? 'Something went wrong. Please try again.');
     }
   };
 
   return (
-    <Modal title={mode === 'login' ? 'Welcome back' : 'Create your account'} onClose={close}>
+    <Modal title={mode === 'login' ? 'Welcome back' : 'Create your account'} onClose={onClose}>
       <p className="auth-subtitle muted">Sign in to like lullabies and build playlists.</p>
 
       <form className="auth-form" onSubmit={handleSubmit}>

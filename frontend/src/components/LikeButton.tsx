@@ -1,10 +1,11 @@
 import { Heart } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth, useRequireAuth } from '../context/AuthContext';
 import { useGetLikesQuery, useLikeMutation, useUnlikeMutation } from '../store/api';
 import './LikeButton.css';
 
 export function LikeButton({ lullabyId }: { lullabyId: string }) {
-  const { isAuthenticated, requireAuth } = useAuth();
+  const { isAuthenticated } = useAuth();
+  const requireAuth = useRequireAuth();
   const { data: likes } = useGetLikesQuery(undefined, { skip: !isAuthenticated });
   const [like] = useLikeMutation();
   const [unlike] = useUnlikeMutation();

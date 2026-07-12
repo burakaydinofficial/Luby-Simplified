@@ -6,6 +6,7 @@ import { store } from './store/store';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
 import { PlayerProvider } from './context/PlayerContext';
+import { ModalProvider } from './context/ModalContext';
 import { App } from './App';
 import './styles/globals.css';
 
@@ -16,7 +17,9 @@ createRoot(document.getElementById('root')!).render(
         <ThemeProvider>
           <AuthProvider>
             <PlayerProvider>
-              <App />
+              <ModalProvider>
+                <App />
+              </ModalProvider>
             </PlayerProvider>
           </AuthProvider>
         </ThemeProvider>
