@@ -2,13 +2,14 @@
   flex: none;
   background: var(--background);
   border-bottom: 1px solid var(--border);
+  font-size: min(1rem, 5vw);
 }
 
 .app-header-inner {
   height: var(--header-height);
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.5em;
 }
 
 .brand {
@@ -26,7 +27,7 @@
 .app-nav {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1em;
 }
 
 .nav-link {
