@@ -33,7 +33,7 @@ catalog from the markdown files in `backend/media/` (idempotent — safe to re-r
 ## Project layout
 
 ```
-Luby-Web/
+Root/
 ├── docker-compose.yml          # db + backend + frontend
 ├── backend/                    # Express API
 │   ├── prisma/schema.prisma    # data model (single source of truth)
