@@ -47,16 +47,18 @@ export function LullabyRow({ lullaby, queue, onRemove }: LullabyRowProps) {
         </span>
       </div>
 
-      <span className="lullaby-row-duration muted">{formatTime(lullaby.durationSec)}</span>
+      <div className="lullaby-row-controls">
+        <span className="lullaby-row-duration muted">{formatTime(lullaby.durationSec)}</span>
 
-      <div className="lullaby-row-actions">
-        <LikeButton lullabyId={lullaby.id} />
-        <AddToPlaylistButton lullaby={lullaby} />
-        {onRemove && (
-          <button className="icon-button" onClick={onRemove} aria-label="Remove from playlist">
-            <Trash2 size={18} />
-          </button>
-        )}
+        <div className="lullaby-row-actions">
+          <LikeButton lullabyId={lullaby.id} />
+          <AddToPlaylistButton lullaby={lullaby} />
+          {onRemove && (
+            <button className="icon-button" onClick={onRemove} aria-label="Remove from playlist">
+              <Trash2 size={18} />
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

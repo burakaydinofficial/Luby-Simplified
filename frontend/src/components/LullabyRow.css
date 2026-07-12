@@ -58,7 +58,6 @@
 
 .lullaby-row-title {
   font-weight: 700;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -76,4 +75,17 @@
   display: flex;
   align-items: center;
   gap: 0.15rem;
+}
+
+.lullaby-row-controls {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.1em min(0.9em, 2vw);
+  flex-wrap: wrap;
+  flex-basis: max-content;
+  flex-grow: 0;
+  flex-shrink: 1;
+  max-width: 50vw;
 }
