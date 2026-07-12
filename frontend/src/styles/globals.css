@@ -1,5 +1,5 @@
-/* Design tokens — ported from Luby and extended for the library app.
-   Three pastel themes; switched via a class on <html> (see ThemeContext). */
+/* Design tokens: three pastel themes, switched via a class on <html>
+   (see ThemeContext). Sizes use em; px only for borders and shadows. */
 :root {
   --background-rgb: 250, 248, 231; /* Very pale yellow */
   --foreground-rgb: 24, 24, 24;
