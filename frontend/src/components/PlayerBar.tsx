@@ -37,6 +37,31 @@ export function PlayerBar() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPlaying, trackId]);
 
+  // Media Session: OS lock-screen / notification media controls + metadata.
+  // This has no in-app UI — it lets the OS keep playback going (and show
+  // controls) while the screen is locked. Re-registered when the track or
+  // next/previous change so the handlers stay current.
+  useEffect(() => {
+    if (!('mediaSession' in navigator) || !currentTrack) return;
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: currentTrack.title,
+      artist: currentTrack.category?.name ?? currentTrack.style,
+      album: 'Luby',
+    });
+    navigator.mediaSession.setActionHandler('play', () => setIsPlaying(true));
+    navigator.mediaSession.setActionHandler('pause', () => setIsPlaying(false));
+    navigator.mediaSession.setActionHandler('previoustrack', () => previous());
+    navigator.mediaSession.setActionHandler('nexttrack', () => next());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trackId, next, previous]);
+
+  // Keep the lock-screen play/pause state in sync.
+  useEffect(() => {
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
+    }
+  }, [isPlaying]);
+
   const handleSeek = (event: MouseEvent<HTMLDivElement>) => {
     const audio = audioRef.current;
     if (!audio || !audio.duration) return;

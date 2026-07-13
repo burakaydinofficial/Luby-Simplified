@@ -41,12 +41,12 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const next = useCallback(() => {
-    if (currentIndex >= 0 && currentIndex < queue.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-      setIsPlaying(true);
-    } else {
-      setIsPlaying(false); // reached the end of the queue
-    }
+    if (queue.length === 0) return;
+    // Loop back to the start at the end of the queue, so playback continues
+    // indefinitely (a lullaby left running should not stop on its own).
+    const nextIndex = currentIndex < queue.length - 1 ? currentIndex + 1 : 0;
+    setCurrentIndex(nextIndex);
+    setIsPlaying(true);
   }, [currentIndex, queue.length]);
 
   const previous = useCallback(() => {
