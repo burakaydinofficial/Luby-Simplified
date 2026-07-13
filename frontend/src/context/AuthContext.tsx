@@ -51,7 +51,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider
       value={{
         user: user ?? null,
-        isAuthenticated: !!user,
+        // Tie auth to the token we control so logout takes effect immediately
+        // (RTK Query keeps the last `user` around when the query is skipped).
+        isAuthenticated: !!token && !!user,
         isLoading: !!token && isLoading,
         login,
         logout,
