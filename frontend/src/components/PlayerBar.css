@@ -51,7 +51,6 @@
   align-items: center;
   gap: 0.125rem;
   flex: 2;
-  max-width: 32rem;
 }
 
 .player-buttons {
@@ -76,6 +75,8 @@
   align-items: center;
   gap: 0.6rem;
   width: 100%;
+  max-width: 32rem;
+  margin: auto;
 }
 
 .player-time {
@@ -97,10 +98,3 @@
   background: var(--accent);
 }
 
-@media (min-width: 840px) {
-  /* Keep the right side balanced with the left track info on wide screens. */
-  .player-bar::after {
-    content: '';
-    flex: 1;
-  }
-}
